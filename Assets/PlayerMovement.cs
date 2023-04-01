@@ -11,10 +11,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask ground;
 
+    Animator animCtrl;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animCtrl = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             }
+        animCtrl.SetBool("isJumping", isGrounded());
+
     }
     
     bool isGrounded()
