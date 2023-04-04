@@ -21,49 +21,59 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal, moveVertical);
 
-        if (movement.x > 0)
+        if (movement.y > 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
         }
-        else if (movement.x < 0)
+        else if (movement.y < 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         }
 
-        if (Mathf.Abs(movement.x) > 0)
+
+        if (movement.x > 0)
         {
-            animator.SetBool("isRunning", true);
-            transform.position += new Vector3(movement.x * speed * Time.deltaTime, 0, 0);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
-        else
+        else if (movement.x < 0)
         {
-            animator.SetBool("isRunning", false);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Debug.Log("Jump pressed");
-            rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f));
-        }
-    }
+        if (Mathf.Abs(movement.y) > 0)
+            {
+                animator.SetBool("isRunning", true);
+                transform.position += new Vector3(movement.y * speed * Time.deltaTime, 0, 0);
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            animator.SetBool("isJumping", false);
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                Debug.Log("Jump pressed");
+                rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f));
+            }
         }
-    }
 
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        void OnCollisionEnter(Collision collision)
         {
-            isGrounded = false;
-            animator.SetBool("isJumping", true);
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = true;
+                animator.SetBool("isJumping", false);
+            }
+        }
+
+        void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = false;
+                animator.SetBool("isJumping", true);
+            }
         }
     }
-}
