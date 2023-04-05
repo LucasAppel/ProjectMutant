@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveThreshold = 0.1f;
     public Animator animator;
 
+   
+
     private Rigidbody rigidBody;
     public bool isGrounded = true;
 
@@ -20,44 +22,57 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical);
 
-        if (movement.y > 0)
+
+
+        if (moveVertical > 0)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-        }
-        else if (movement.y < 0)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+            animator.SetBool("isWalking", true);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
 
-        if (movement.x > 0)
+        if (moveVertical < 0)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        }
-        else if (movement.x < 0)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            animator.SetBool("isWalking", true);
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
 
-        if (Mathf.Abs(movement.y) > 0)
+        if (moveVertical == 0)
+
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                animator.SetBool("isRunning", true);
-                transform.position += new Vector3(movement.y * speed * Time.deltaTime, 0, 0);
-            }
-            else
-            {
-                animator.SetBool("isRunning", false);
-            }
-
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                Debug.Log("Jump pressed");
                 rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f));
             }
+
+
+        if (Input.GetKey ("left shift"))
+            {
+            speed = 25.0f;
+            animator.SetBool("isRunning", true);
+             }
+
+        else
+        {
+            speed = 10.0f;
+            animator.SetBool("isRunning", false);
         }
+
+        
+
+        }
+
+
+        
+
 
         void OnCollisionEnter(Collision collision)
         {
