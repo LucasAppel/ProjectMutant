@@ -17,6 +17,7 @@ public class MouseMovement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -24,7 +25,9 @@ public class MouseMovement : MonoBehaviour
     {
         turn.x += Input.GetAxis("Mouse X") * sensitivy;
         mover.transform.localRotation = Quaternion.Euler(0, turn.x, 0);
-     
+
+      
+
 
         deltaMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0) * speed * Time.deltaTime;
         mover.transform.Translate(deltaMove);
