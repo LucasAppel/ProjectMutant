@@ -3139,8 +3139,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9623572, z: 0.99077934}
+  m_Center: {x: 0, y: -0.018821359, z: 0.0046107788}
 --- !u!23 &456709127
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3199,7 +3199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456709125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.211366, y: -12.030806, z: 2.443367}
+  m_LocalPosition: {x: 8.211366, y: -12.135, z: 2.443367}
   m_LocalScale: {x: 49.848724, y: 0.1, z: 1.0957}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4199,7 +4199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4207,7 +4207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.760406
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4215,7 +4215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.649448
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4227,7 +4227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4900,7 +4900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857642472}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.8186655, y: -12.030806, z: -3.566733}
+  m_LocalPosition: {x: 10.8186655, y: -12.135, z: -3.566733}
   m_LocalScale: {x: 55.065464, y: 0.1, z: 1.0957}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5617,14 +5617,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.11305577, y: -0, z: -0, w: 0.9935886}
-  m_LocalPosition: {x: -0.23, y: 3.1, z: -6.12}
+  m_LocalRotation: {x: -0.03707247, y: 0.0007312452, z: 0.019707354, w: 0.99911803}
+  m_LocalPosition: {x: -0.128, y: 0.949, z: -3.222}
   m_LocalScale: {x: 1.2916999, y: 1.2917, z: 1.2917}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1430871650}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 12.983, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.25, y: 0, z: 2.26}
 --- !u!1 &967208080
 GameObject:
   m_ObjectHideFlags: 0
@@ -9156,7 +9156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf92fdc0b07d234eb22a07d2e7f94fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  walkSpeed: 6
+  runSpeed: 20
   jumpForce: 200
   moveThreshold: 0.1
   animator: {fileID: 1430871648}
@@ -9172,8 +9173,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1.0188437, y: 1.9493926, z: 1}
+  m_Center: {x: 0.009421825, y: 1.0006086, z: -2.2869916e-17}
 --- !u!54 &1430871647
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9208,10 +9209,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turn: {x: 0, y: 0}
-  sensitivy: 5
+  sensitivyX: 5
+  sensitivyY: 0.3
   deltaMove: {x: 0, y: 0, z: 0}
   speed: 1
   mover: {fileID: 1430871644}
+  mainCamera: {fileID: 963194228}
 --- !u!4 &1430871650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d05df4942fe887e44b48b3206a620148, type: 3}

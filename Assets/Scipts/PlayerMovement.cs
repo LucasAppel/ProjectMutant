@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10.0f;
+    
+    public float walkSpeed = 6.0f;
+    private float speed;
+    public float runSpeed = 20.0f;
     public float jumpForce = 500.0f;
     public float moveThreshold = 0.1f;
     public Animator animator;
@@ -15,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        speed = walkSpeed;
         rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -51,18 +55,19 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f));
-            }
+                animator.SetBool("isJumping", true);
+        }
 
 
         if (Input.GetKey ("left shift"))
             {
-            speed = 25.0f;
+            speed = runSpeed;
             animator.SetBool("isRunning", true);
              }
 
         else
         {
-            speed = 10.0f;
+            speed = walkSpeed;
             animator.SetBool("isRunning", false);
         }
 
@@ -71,10 +76,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        isGrounded = true;
+        animator.SetBool("isJumping", false);
+    }
 
 
-        void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Ground"))
             {
@@ -83,12 +101,5 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        void OnCollisionExit(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                isGrounded = false;
-                animator.SetBool("isJumping", true);
-            }
-        }
+
     }
